@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Send POST Request</title>
+</head>
+<body>
+	<script>
+		// Define the data to be sent
+		const data = { action: 'Button1' };
+
+		// Make the POST request
+		fetch('/submit-form', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+		.then(response => {
+			console.log(response);
+		})
+		.catch(error => {
+			console.error(error);
+		});
+	</script>
+</body>
+</html>

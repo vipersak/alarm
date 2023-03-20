@@ -3,7 +3,7 @@ import { fileURLToPath } from 'url';
 import { dirname } from 'path';
 import express from 'express';
 import bodyParser from 'body-parser';
-import nodemailer from'nodemailer';
+
 
 const app = express();
 const port = 5000;
@@ -25,32 +25,9 @@ app.get('/', (req, res) => {
 
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.ethereal.email',
-  port: 587,
-  auth: {
-      user: 'ariel.will52@ethereal.email',
-      pass: 'wvDs3RB19bhzdbPWZM'
-  }
-});
 
-// Function to send email
-function sendMail(emailAddress) {
-  // Set up email content
-  const mailOptions = {
-    from: 'ariel.will52@ethereal.email',
-    to: emailAddress,
-    subject: 'Alarm is triggered',
-    text: 'This is a notification email sent by Smart alarm system to notify that alarm is activated'
-  };
-  transporter.sendMail(mailOptions, function(error, info){
-    if (error) {
-      console.log(error);
-    } else {
-      console.log(`Email sent: ${info.response} at ${new Date().toLocaleString()}`);
-    }
-  });
-}
+
+
 
 let selectedAction1 = '';
 
@@ -100,8 +77,9 @@ app.post('/nfc-action2', (req, res) => {
     
     if (postData === "NFC1") {
       if(selectedAction2 === "<span></span>Send Email"){
-        const emailAddress = 'ariel.will52@ethereal.email';
-        sendMail(emailAddress);
+        fetch("https://maker.ifttt.com/trigger/email/json/with/key/OMJ1aYgV34g7k5KCA2sFh", {
+          method: "GET" 
+        })
         
         
         res.send(`Email sent at ${new Date().toLocaleString()}`);
@@ -125,8 +103,9 @@ app.post('/nfc-action2', (req, res) => {
        }
     } else if (postData === "Button1") {
       if(selectedAction1 === "<span></span>Send Email"){
-        const emailAddress = 'ariel.will52@ethereal.email';
-        sendMail(emailAddress);
+        fetch("https://maker.ifttt.com/trigger/email/json/with/key/OMJ1aYgV34g7k5KCA2sFh", {
+          method: "GET" 
+        })
        
        
         res.send(`Email sent at ${new Date().toLocaleString()}`);
@@ -145,17 +124,27 @@ app.post('/nfc-action2', (req, res) => {
           })
             
             res.send(`Call sent at ${new Date().toLocaleString()}`);
-           
+
+
+          } else if(selectedAction1 === "<span></span>Play Music"){
+
+            fetch("https://maker.ifttt.com/trigger/music/json/with/key/OMJ1aYgV34g7k5KCA2sFh", {
+          method: "GET" 
+        })
+        
+        
+        res.send(`Music played at ${new Date().toLocaleString()}`);
       } else {
         res.status(400).send('Invalid action');
       }
     } else if (postData === "NFC2") {
-      if(selectedAction3 === "<span></span>Send Email"){
-        const emailAddress = 'ariel.will52@ethereal.email';
-        sendMail(emailAddress);
+      if(selectedAction3 === "<span></span>Play Music"){
+        fetch("https://maker.ifttt.com/trigger/music/json/with/key/OMJ1aYgV34g7k5KCA2sFh", {
+          method: "GET" 
+        })
         
         
-        res.send(`Email sent at ${new Date().toLocaleString()}`);
+        res.send(`Music played at ${new Date().toLocaleString()}`);
         
       } else {
         res.status(400).send('Invalid action');
