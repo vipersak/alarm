@@ -1,8 +1,10 @@
+const https = require("https");
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const port = 3000;
+import fetch from 'node-fetch';
 
 
 // Serve static files (including CSS file) from the "public" directory
