@@ -1,11 +1,16 @@
-const https = require("https");
-const express = require('express');
-const app = express();
-const bodyParser = require('body-parser');
-const nodemailer = require('nodemailer');
-const port = 3000;
 import fetch from 'node-fetch';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import express from 'express';
+import bodyParser from 'body-parser';
+import nodemailer from'nodemailer';
 
+const app = express();
+const port = 5000;
+
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 // Serve static files (including CSS file) from the "public" directory
 app.use(express.static('public'));
