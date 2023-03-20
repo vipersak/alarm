@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>NFC triggered</title>
+</head>
+<body>
+	<p id="response"></p>
+	<script>
+		// Define the data to be sent
+		const data = { action: 'NFC2' };
+
+		// Make the POST request
+		fetch('/submit-form', {
+			method: 'POST',
+			body: JSON.stringify(data),
+			headers: {
+				'Content-Type': 'application/json'
+			}
+		})
+	.then(response => response.text())
+    .then(text => {
+      const responseElement = document.getElementById('response');
+      responseElement.textContent = text;
+    })
+    .catch(error => {
+      console.error(error);
+    });
+	</script>
+</body>
+</html>

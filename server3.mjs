@@ -12,19 +12,32 @@ const port = 5000;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const now = new Date();
+const future = new Date(now.getTime() + 2 * 60 * 60 * 1000);
+
 // Serve static files (including CSS file) from the "public" directory
 app.use(express.static('public'));
 
 // parse application/json
 app.use(bodyParser.json());
 
+app.use(express.json());
+
+
 // Serve the HTML file
 app.get('/', (req, res) => {
   res.sendFile(__dirname + '/index2.html');
 });
 
-app.use(express.json());
 
+
+app.get('/NFC1', function(req, res) {
+  res.sendFile(__dirname + '/NFC1.html');
+});
+
+app.get('/NFC1', function(req, res) {
+  res.sendFile(__dirname + '/NFC2.html');
+});
 
 
 
@@ -82,7 +95,7 @@ app.post('/nfc-action2', (req, res) => {
         })
         
         
-        res.send(`Email sent at ${new Date().toLocaleString()}`);
+        res.send(`Email sent at ${future.toLocaleString()}`);
         
       } else if(selectedAction2 === "<span></span>Send Text"){
           
@@ -90,14 +103,14 @@ app.post('/nfc-action2', (req, res) => {
           method: "GET" 
         })
           
-          res.send(`Text sent at ${new Date().toLocaleString()}`);
+          res.send(`Text sent at ${future.toLocaleString()}`);
         } else if(selectedAction2 === "<span></span>Send Call"){
           
           fetch("https://maker.ifttt.com/trigger/call/json/with/key/cOb-Fgm0AdE3MvsFVxc0cB", {
             method: "GET" 
           })
             
-            res.send(`Call sent at ${new Date().toLocaleString()}`);
+            res.send(`Call sent at ${future.toLocaleString()}`);
         }else {
         res.status(400).send('Invalid action');
        }
@@ -108,7 +121,7 @@ app.post('/nfc-action2', (req, res) => {
         })
        
        
-        res.send(`Email sent at ${new Date().toLocaleString()}`);
+        res.send(`Email sent at ${future.toLocaleString()}`);
 
       } else if(selectedAction1 === "<span></span>Send Text"){
           
@@ -116,14 +129,14 @@ app.post('/nfc-action2', (req, res) => {
           method: "GET" 
         })
           
-          res.send(`Text sent at ${new Date().toLocaleString()}`);
+          res.send(`Text sent at ${future.toLocaleString()}`);
         } else if(selectedAction1 === "<span></span>Send Call"){
           
           fetch("https://maker.ifttt.com/trigger/call/json/with/key/cOb-Fgm0AdE3MvsFVxc0cB", {
             method: "GET" 
           })
             
-            res.send(`Call sent at ${new Date().toLocaleString()}`);
+            res.send(`Call sent at ${future.toLocaleString()}`);
 
 
           } else if(selectedAction1 === "<span></span>Play Music"){
@@ -133,7 +146,7 @@ app.post('/nfc-action2', (req, res) => {
         })
         
         
-        res.send(`Music played at ${new Date().toLocaleString()}`);
+        res.send(`Music played at ${future.toLocaleString()}`);
       } else {
         res.status(400).send('Invalid action');
       }
@@ -144,7 +157,14 @@ app.post('/nfc-action2', (req, res) => {
         })
         
         
-        res.send(`Music played at ${new Date().toLocaleString()}`);
+        res.send(`Music played at ${future.toLocaleString()}`);
+      } else if(selectedAction3 === "<span></span>Coffeemaking Tutorial"){
+
+        res.redirect('https://www.youtube.com/watch?v=lVeNTofDB2k');
+
+      } else if(selectedAction3 === "<span></span>Useful Contact Information"){
+
+        res.redirect('https://www.infofinland.fi/en/health/emergencies');
         
       } else {
         res.status(400).send('Invalid action');
