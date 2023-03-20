@@ -5,6 +5,12 @@ import express from 'express';
 import bodyParser from 'body-parser';
 
 
+
+
+
+
+
+
 const app = express();
 const port = 5000;
 
@@ -17,6 +23,8 @@ const future = new Date(now.getTime() + 2 * 60 * 60 * 1000);
 
 // Serve static files (including CSS file) from the "public" directory
 app.use(express.static('public'));
+
+
 
 // parse application/json
 app.use(bodyParser.json());
@@ -157,14 +165,15 @@ app.post('/nfc-action2', (req, res) => {
         })
         
         
-        res.send(`Music played at ${future.toLocaleString()}`);
-      } else if(selectedAction3 === "<span></span>Coffeemaking Tutorial"){
+        res.status(200).json({ url: 'https://www.youtube.com/watch?v=IF2t2CeDhGg' });
 
-        res.redirect('https://www.youtube.com/watch?v=lVeNTofDB2k');
+      } else if(selectedAction3 === "<span></span>Coffeemaking Tutorial"){
+        res.status(200).json({ url: 'https://www.youtube.com/watch?v=lVeNTofDB2k' });
 
       } else if(selectedAction3 === "<span></span>Useful Contact Information"){
 
-        res.redirect('https://www.infofinland.fi/en/health/emergencies');
+        res.status(200).json({ url: 'https://www.infofinland.fi/en/health/emergencies' });
+        
         
       } else {
         res.status(400).send('Invalid action');

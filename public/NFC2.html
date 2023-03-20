@@ -17,14 +17,10 @@
 				'Content-Type': 'application/json'
 			}
 		})
-	.then(response => response.text())
-    .then(text => {
-      const responseElement = document.getElementById('response');
-      responseElement.textContent = text;
-    })
-    .catch(error => {
-      console.error(error);
-    });
+  .then(response => response.json())
+  .then(data => window.location.href = data.url)
+  .catch(error => console.error(error));
+
 	</script>
 </body>
 </html>
